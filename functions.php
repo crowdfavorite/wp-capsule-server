@@ -6,6 +6,8 @@ define('CAPSULE_TAX_PREFIX_TAG', '#');
 define('CAPSULE_TAX_PREFIX_CODE', '`');
 
 include('controller.php');
+include('capsule-server.class.php');
+include('capsule-server-import.class.php');
 
 show_admin_bar(false);
 
