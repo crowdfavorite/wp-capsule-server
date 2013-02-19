@@ -2,7 +2,7 @@
 class Capsule_Server_Import_Post {
 
 	// $data includes three keys:
-	function __construct($api_key, $post, $tax_data) {
+	function __construct($user_id, $post, $tax_data) {
 		$this->cap_server = new Capsule_Server();
 
 		$this->api_key = $api_key;
@@ -10,23 +10,7 @@ class Capsule_Server_Import_Post {
 		$this->tax_data = $tax_data;
 		$this->local_post_id = 0;
 
-		$this->set_user();
-	}
-
-	//@TODO This should be somewhere else so capsule-server can use it
-	function set_user() {
-		global $wpdb;
-		$sql = $wpdb->prepare("
-			SELECT `user_id`
-			FROM $wpdb->usermeta
-			WHERE `meta_key` = %s
-			AND `meta_value` = %s", 
-			$this->cap_server->api_meta_key,
-			$this->api_key
-		);
-
-		//@TODO throw error if none found
-		$this->user_id = $wpdb->get_var($sql);
+		$this->user_id = $user_id;
 		$this->post['post_author'] = $this->user_id;
 	}
 
@@ -61,7 +45,6 @@ class Capsule_Server_Import_Post {
 
 		if (!empty($taxonomies)) {
 			foreach ($taxonomies as $taxonomy) {
-				error_log($taxonomy);
 				if (isset($tax_input[$taxonomy])) {
 					$terms = (array) $tax_input[$taxonomy];
 
@@ -93,7 +76,6 @@ class Capsule_Server_Import_Post {
 					}
 				}
 				else {
-					error_log($taxonomy);
 					// There were no terms passed, so unset the current terms
 					wp_set_post_terms($this->local_post_id, array(), $taxonomy);
 				}
@@ -142,32 +124,14 @@ class Capsule_Server_Import_Post {
 }
 
 class Capsule_Server_Export_Terms {
-	// $data includes three keys:
-	function __construct($api_key = null, $taxonomies = array()) {
-		//$this->cap_server = new Capsule_Server();
-		//$this->api_key = $api_key;
-		//$this->set_user();
+	
+	function __construct($taxonomies = array()) {
 		$this->taxonomies = $taxonomies;
 	}
 
-	//@TODO This should be somewhere else so capsule-server can use it
-	function set_user() {
-		global $wpdb;
-		$sql = $wpdb->prepare("
-			SELECT `user_id`
-			FROM $wpdb->usermeta
-			WHERE `meta_key` = %s
-			AND `meta_value` = %s", 
-			$this->cap_server->api_meta_key,
-			$this->api_key
-		);
-
-		//@TODO throw error if none found
-		$this->user_id = $wpdb->get_var($sql);
-	}
-
-	/*
-	 *'taxonomy_1' => array(
+	/**
+	 * @return array of formatted taxonomies:
+	 *  'taxonomy_1' => array(
 	 *		'term-slug' => array(
 	 *			'id' => 1,
 	 *			'name' => 'Amazing Term',
@@ -175,10 +139,9 @@ class Capsule_Server_Export_Terms {
 	 *		),
 	 *		'term-slug-2' ...
 	 * 	),
-	 * 	'taxonomy_2' ....
+	 * 	'taxonomy_2' ...
 	 */ 
 	function get_terms() {
-		//@TODO validate user
 		$taxonomy_array = array();
 
 		$terms = get_terms($this->taxonomies, array('hide_empty' => false));
@@ -196,7 +159,6 @@ class Capsule_Server_Export_Terms {
 	}
 }
 
-
 function capsule_server_request_handler() {
 	switch ($_POST['capsule_server_action']) {
 		case 'insert_post':
@@ -204,9 +166,10 @@ function capsule_server_request_handler() {
 			if (isset($_POST['capsule_client_post_data'])) {
 				$data = $_POST['capsule_client_post_data'];
 				if (isset($data['post']) && isset($data['tax']) && isset($data['api_key'])) {
-					//@TODO validate here?
-					$capsule_import = new Capsule_Server_Import_Post($data['api_key'], $data['post'], $data['tax']);
-					$post_id = $capsule_import->import();
+					if ($user_id = capsule_server_validate_user($data['api_key'])) {
+						$capsule_import = new Capsule_Server_Import_Post($user_id, $data['post'], $data['tax']);
+						$post_id = $capsule_import->import();
+					}
 					//@TODO catch error?
 				}
 				else {
@@ -215,15 +178,16 @@ function capsule_server_request_handler() {
 			}
 			break;
 		case 'get_terms':
-			$term_exporter = new Capsule_Server_Export_Terms($_POST['capsule_client_post_data']['api_key'], $_POST['capsule_client_post_data']['taxonomies']);
-			//@TODO Validate user here, not in function
-			echo serialize($term_exporter->get_terms());
+			if (isset($_POST['capsule_client_post_data']['api_key']) && capsule_server_validate_user($_POST['capsule_client_post_data']['api_key'])) {
+				$taxonomies = isset($_POST['capsule_client_post_data']['taxonomies']) ? $_POST['capsule_client_post_data']['taxonomies'] : array();
+				$term_exporter = new Capsule_Server_Export_Terms($taxonomies);
+				echo serialize($term_exporter->get_terms());
+			}			
 			die();
 			break;		
 		default:
 			break;
 	}
-	
 }
 add_action('wp_loaded', 'capsule_server_request_handler');
 

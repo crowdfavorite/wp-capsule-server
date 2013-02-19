@@ -8,17 +8,12 @@ class Capsule_Server {
 	protected $api_endpoint;
 
 	function __construct($user_id = null) {
+		
 		$this->user_id = $user_id === null ? get_current_user_id() : $user_id;
 		
 		$this->api_endpoint = home_url();
 
-		if (is_multisite()) {
-			global $blog_id;
-			$this->api_meta_key = $blog_id == 1 ? '_capsule_api_key' : '_capsule_api_key_'.$blog_id;
-		}
-		else {
-			$this->api_meta_key = '_capsule_api_key';
-		}
+		$this->api_meta_key = capsule_server_api_meta_key();
 
 		$this->user_api_key = get_user_meta($this->user_id, $this->api_meta_key, true);
 	}
@@ -89,3 +84,43 @@ class Capsule_Server {
 $cap_server = new Capsule_Server();
 $cap_server->add_actions();
 
+
+/** 
+ * Generate the user meta key for the api key value.
+ * This generates a different key for each blog if it is a multisite install
+ *
+ * @return string meta key
+ **/
+function capsule_server_api_meta_key() {
+	if (is_multisite()) {
+		global $blog_id;
+		$api_meta_key = ($blog_id == 1) ? '_capsule_api_key' : '_capsule_api_key_'.$blog_id;
+	}
+	else {
+		$api_meta_key = '_capsule_api_key';
+	}
+	
+	return $api_meta_key;
+}
+
+/**
+ * Validates a user's existance in the db against an api key.
+ * 
+ * @param string $api_key The api key to use for the validation
+ * @return int|null user ID or null if none can be found. 
+ */
+function capsule_server_validate_user($api_key) {
+	global $wpdb;
+
+	$meta_key = capsule_server_api_meta_key();
+	$sql = $wpdb->prepare("
+		SELECT `user_id`
+		FROM $wpdb->usermeta
+		WHERE `meta_key` = %s
+		AND `meta_value` = %s", 
+		$meta_key,
+		$api_key
+	);
+
+	return $wpdb->get_var($sql);
+}
