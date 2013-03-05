@@ -170,6 +170,10 @@ function capsule_server_request_handler() {
 						$capsule_import = new Capsule_Server_Import_Post($user_id, $data['post'], $data['tax']);
 						$post_id = $capsule_import->import();
 					}
+					else {
+						header('HTTP/1.1 401 Unauthorized');
+						die();
+					}
 					//@TODO catch error?
 				}
 				else {
@@ -182,7 +186,10 @@ function capsule_server_request_handler() {
 				$taxonomies = isset($_POST['capsule_client_post_data']['taxonomies']) ? $_POST['capsule_client_post_data']['taxonomies'] : array();
 				$term_exporter = new Capsule_Server_Export_Terms($taxonomies);
 				echo serialize($term_exporter->get_terms());
-			}			
+			}
+			else {
+				header('HTTP/1.1 401 Unauthorized');
+			}	
 			die();
 			break;		
 		default:
