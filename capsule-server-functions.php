@@ -39,16 +39,23 @@ class Capsule_Server {
 ?>
 <h3><?php _e('Capsule Credentials', 'capsule-server'); ?></h3>
 <table class="form-table">
-	<tr id="capsule-api-key">
-		<th><label for="cap-api-key"><?php _e('Capsule API Key', 'capsule-server'); ?></label></th>
-		<td><input type="text" name="cap-api-key" id="cap-api-key" size="35" value="<?php echo esc_attr($api_key); ?>" readonly="readonly" />
-		</td>
+	<tr>
+		<th></th>
+		<td><span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit incidunt soluta adipisci officia autem sint doloremque odit corporis optio natus nam unde aperiam saepe vel odio ducimus animi quisquam numquam dolor explicabo veritatis quaerat fugiat! </span>&nbsp;<a href="#">Learn more.</a></td>
 	</tr>
 	<tr id="capsule-endpoint">
 		<th><label for="cap-endpoint"><?php _e('Capsule API Endpoint', 'capsule-server'); ?></label></th>
-		<td><input type="text" name="cap-endpoint" id="cap-endpoint" size="35" value="<?php echo $api_endpoint; ?>" readonly="readonly" />
-		</td>
+		<td><span id="cap-endpoint"><?php echo $api_endpoint; ?><span/></td>
 	</tr>
+	<tr id="capsule-api-key">
+		<th><label for="cap-api-key"><?php _e('Capsule API Key', 'capsule-server'); ?></label></th>
+		<td><span id="cap-api-key"><?php echo esc_attr($api_key); ?></span></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td><a href="#" class="button">Reset Capsule API Key</a></td>
+	</tr>
+
 </table>
 <?php 
 	}
