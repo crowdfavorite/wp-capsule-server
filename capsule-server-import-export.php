@@ -31,6 +31,10 @@ class Capsule_Server_Import_Post {
 			$this->post['ID'] = $local_id;
 		}
 
+		remove_filter('content_save_pre', 'wp_filter_post_kses');
+		remove_filter('excerpt_save_pre', 'wp_filter_post_kses');
+		remove_filter('content_filtered_save_pre', 'wp_filter_post_kses');
+
 		$this->local_post_id = wp_insert_post($this->post);
 		//@TODO throw error?
 	}
