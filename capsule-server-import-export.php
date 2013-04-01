@@ -65,7 +65,7 @@ class Capsule_Server_Import_Post {
 							
 							foreach ($terms as $term) {
 								// Get term, create if not exists
-								$term_id = $this->cap_server_create_term($term, $taxonomy);
+								$term_id = capsule_create_term($term, $taxonomy);
 								
 								if ($term_id) {
 									$terms_as_id[] = $term_id;
@@ -107,24 +107,6 @@ class Capsule_Server_Import_Post {
 
 	//@TODO remove user from blog, delete their API key
 	function cap_server_remove_user() {}
-
-	// Similar functionality of wp_create_term but wp_create_term is in wp-admin includes which are not loaded
-	// 
-	function cap_server_create_term($tag_name, $taxonomy) {
-		if ($term_info = term_exists($tag_name, $taxonomy)) {
-			if (is_array($term_info)) {
-				return $term_info['term_id'];
-			}
-
-			return false;
-		}
-
-		$term_info = wp_insert_term($tag_name, $taxonomy);
-		if (is_array($term_info)) {
-			return $term_info['term_id'];
-		}
-		return false;
-	}
 }
 
 class Capsule_Server_Export_Terms {
