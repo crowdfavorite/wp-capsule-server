@@ -56,7 +56,7 @@ class Capsule_Server {
 <table class="form-table">
 	<tr>
 		<th></th>
-		<td><span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit incidunt soluta adipisci officia autem sint doloremque odit corporis optio natus nam unde aperiam saepe vel odio ducimus animi quisquam numquam dolor explicabo veritatis quaerat fugiat! </span>&nbsp;<a href="#">Learn more.</a></td>
+		<td><span class="description"><?php _e('Below are the credentials for your client installation of Capsule. Providing these credentials to your client installation will allow it to push posts you make there to this server based on the project.', 'capsle-server'); ?> </span></td>
 	</tr>
 	<tr id="capsule-endpoint">
 		<th><label for="cap-endpoint"><?php _e('Capsule API Endpoint', 'capsule-server'); ?></label></th>
@@ -69,7 +69,6 @@ class Capsule_Server {
 	<tr>
 		<th></th>
 		<td><a href="<?php echo wp_nonce_url(admin_url('admin-ajax.php'), 'cap-regenerate-key'); ?>" id="cap-regenerate-key" class="button" data-user-id="<?php echo esc_attr($user_data->ID); ?>"><?php _e('Reset Capsule API Key', 'capsule-server'); ?></a></td>
-		// need to noncify this
 	</tr>
 
 </table>
@@ -113,7 +112,7 @@ $cap_server->add_actions();
 function capsule_server_ajax_new_api() {
 	$nonce = $_GET['_wpnonce'];
 	$user_id = $_POST['user_id'];
-	if ($user_id && wp_verify_nonce($nonce, 'cap-regenerate-key')) {
+	if ($user_id && wp_verify_nonce($nonce, 'cap-regenerate-key') && (current_user_can('edit_users') || $user_id == get_current_user_id())) {
 		$cap = new Capsule_Server($user_id);
 		$key = $cap->generate_api_key();
 		$cap->set_api_key($key);
