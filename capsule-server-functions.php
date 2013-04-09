@@ -21,6 +21,7 @@ class Capsule_Server {
 	public function add_actions() {
 		add_action('user_register', array(&$this, 'user_register'));
 		add_action('show_user_profile', array(&$this, 'user_profile'));
+		add_action('edit_user_profile', array(&$this, 'user_profile'));
 
 		add_action('admin_enqueue_scripts', array(&$this, 'enqueue_scripts'));
 	}
@@ -67,7 +68,8 @@ class Capsule_Server {
 	</tr>
 	<tr>
 		<th></th>
-		<td><a href="#" id="cap-regenerate-key" class="button" data-user-id="<?php echo esc_attr($this->user_id); ?>"><?php _e('Reset Capsule API Key', 'capsule-server'); ?></a></td>
+		<td><a href="<?php echo wp_nonce_url(admin_url('admin-ajax.php'), 'cap-regenerate-key'); ?>" id="cap-regenerate-key" class="button" data-user-id="<?php echo esc_attr($user_data->ID); ?>"><?php _e('Reset Capsule API Key', 'capsule-server'); ?></a></td>
+		// need to noncify this
 	</tr>
 
 </table>
@@ -84,7 +86,7 @@ class Capsule_Server {
 			$key = AUTH_KEY;
 		}
 
-		return sha1($this->user_id.$key.time());
+		return sha1($this->user_id.$key.microtime());
 	}
 
 
@@ -105,14 +107,13 @@ class Capsule_Server {
 		return $this->user_api_key;
 	}
 }
-
 $cap_server = new Capsule_Server();
 $cap_server->add_actions();
 
-
 function capsule_server_ajax_new_api() {
+	$nonce = $_GET['_wpnonce'];
 	$user_id = $_POST['user_id'];
-	if ($user_id) {
+	if ($user_id && wp_verify_nonce($nonce, 'cap-regenerate-key')) {
 		$cap = new Capsule_Server($user_id);
 		$key = $cap->generate_api_key();
 		$cap->set_api_key($key);

@@ -3,8 +3,6 @@ class Capsule_Server_Import_Post {
 
 	// $data includes three keys:
 	function __construct($user_id, $post, $tax_data) {
-		$this->cap_server = new Capsule_Server();
-
 		$this->api_key = $api_key;
 		$this->post = $post;
 		$this->tax_data = $tax_data;
