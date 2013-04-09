@@ -21,6 +21,20 @@ class Capsule_Server {
 	public function add_actions() {
 		add_action('user_register', array(&$this, 'user_register'));
 		add_action('show_user_profile', array(&$this, 'user_profile'));
+
+		add_action('admin_enqueue_scripts', array(&$this, 'enqueue_scripts'));
+	}
+
+	public static function enqueue_scripts() {
+		$template_url = trailingslashit(get_template_directory_uri());
+	
+		wp_enqueue_script(
+			'capsule-server',
+			$template_url.'js/capsule-server.js',
+			array('jquery'),
+			CAPSULE_URL_VERSION,
+			true
+		);
 	}
 
 	public function user_register($user_id) {
@@ -49,18 +63,18 @@ class Capsule_Server {
 	</tr>
 	<tr id="capsule-api-key">
 		<th><label for="cap-api-key"><?php _e('Capsule API Key', 'capsule-server'); ?></label></th>
-		<td><span id="cap-api-key"><?php echo esc_attr($api_key); ?></span></td>
+		<td><span id="cap-api-key"><?php echo esc_html($api_key); ?></span></td>
 	</tr>
 	<tr>
 		<th></th>
-		<td><a href="#" class="button">Reset Capsule API Key</a></td>
+		<td><a href="#" id="cap-regenerate-key" class="button" data-user-id="<?php echo esc_attr($this->user_id); ?>"><?php _e('Reset Capsule API Key', 'capsule-server'); ?></a></td>
 	</tr>
 
 </table>
 <?php 
 	}
 
-	protected function get_api_key() {
+	 function generate_api_key() {
 		// Generate unique keys on a per blog basis
 		if (is_multisite()) {
 			global $blog_id;
@@ -70,17 +84,21 @@ class Capsule_Server {
 			$key = AUTH_KEY;
 		}
 
-		return sha1($this->user_id.$key);
+		return sha1($this->user_id.$key.time());
 	}
 
-	protected function set_api_key() {
-		update_user_meta($this->user_id, $this->api_meta_key, $this->user_api_key);
+
+	 function set_api_key($key = null) {
+		if ($key == null) {
+			$key = $this->user_api_key;
+		}
+		update_user_meta($this->user_id, $this->api_meta_key, $key);
 	}
 
 	// Gets an api key for a user, generates a new one and sets it if the user doesn't have a key
-	protected function user_api_key() {
+	 function user_api_key() {
 		if (empty($this->user_api_key)) {
-			$this->user_api_key = $this->get_api_key();
+			$this->user_api_key = $this->generate_api_key();
 			$this->set_api_key();
 		}
 
@@ -91,6 +109,18 @@ class Capsule_Server {
 $cap_server = new Capsule_Server();
 $cap_server->add_actions();
 
+
+function capsule_server_ajax_new_api() {
+	$user_id = $_POST['user_id'];
+	if ($user_id) {
+		$cap = new Capsule_Server($user_id);
+		$key = $cap->generate_api_key();
+		$cap->set_api_key($key);
+		echo $key;
+	}
+	die();
+}
+add_action('wp_ajax_cap_new_api_key', 'capsule_server_ajax_new_api');
 
 /** 
  * Generate the user meta key for the api key value.
