@@ -56,7 +56,7 @@ class Capsule_Server {
 <table class="form-table">
 	<tr>
 		<th></th>
-		<td><span class="description"><?php _e('Below are the credentials for your client installation of Capsule. Providing these credentials to your client installation will allow it to push posts you make there to this server based on the project.', 'capsle-server'); ?> </span></td>
+		<td><span class="description"><?php _e('Enter the information below as a Server in your Capsule install. You will then be able to send posts to this Capsule Server.', 'capsle-server'); ?> </span></td>
 	</tr>
 	<tr id="capsule-endpoint">
 		<th><label for="cap-endpoint"><?php _e('Capsule API Endpoint', 'capsule-server'); ?></label></th>
@@ -68,7 +68,7 @@ class Capsule_Server {
 	</tr>
 	<tr>
 		<th></th>
-		<td><a href="<?php echo wp_nonce_url(admin_url('admin-ajax.php'), 'cap-regenerate-key'); ?>" id="cap-regenerate-key" class="button" data-user-id="<?php echo esc_attr($user_data->ID); ?>"><?php _e('Reset Capsule API Key', 'capsule-server'); ?></a></td>
+		<td><a href="<?php echo wp_nonce_url(admin_url('admin-ajax.php'), 'cap-regenerate-key'); ?>" id="cap-regenerate-key" class="button" data-user-id="<?php echo esc_attr($user_data->ID); ?>"><?php _e('Change Capsule API Key', 'capsule-server'); ?></a></td>
 	</tr>
 
 </table>
@@ -160,4 +160,54 @@ function capsule_server_validate_user($api_key) {
 	);
 
 	return $wpdb->get_var($sql);
+}
+
+function capsule_server_admin_notice(){
+	if (strpos($_GET['page'], 'capsule') !== false) {
+		return;
+	}
+?>
+<style type="text/css">
+.capsule-welcome {
+	background: #222;
+	color: #fff;
+	margin: 10px 10px 10px 0;
+	padding: 15px;
+}
+.capsule-welcome h1 {
+	font-weight: normal;
+	line-height: 100%;
+	margin: 0 0 10px 0;
+}
+.capsule-welcome p {
+	font-weight: normal;
+	line-height: 100%;
+	margin: 0;
+}
+.capsule-welcome a,
+.capsule-welcome a:visited {
+	color: #f8f8f8;
+}
+</style>
+<section class="capsule-welcome">
+	<h1><?php _e('Welcome to Capsule Server', 'capsule-server'); ?></h1>
+	<p><?php printf(__('Please read the overview, FAQs and more about <a href="%s">how Capsule Server works</a>.', 'capsule-server'), esc_url(admin_url('admin.php?page=capsule'))); ?></p>
+</section>
+<?php
+}
+add_action('admin_notices', 'capsule_server_admin_notice');
+
+// Add menu pages
+function capsule_server_menu() {
+	global $menu;
+	$menu['3'] = array( '', 'read', 'separator-capsule', '', 'wp-menu-separator' );
+	add_menu_page(__('Capsule', 'capsule_client'), __('Capsule', 'capsule-server'), 'manage_options', 'capsule', 'capsule_server_page', '', '3.1' );
+	// needed to make separator show up
+	ksort($menu);
+// 	add_submenu_page('capsule', __('Projects', 'capsule_client'), __('Projects', 'capsule_client'), 'manage_options', 'capsule-projects', array($this, 'term_mapping_page'));
+}
+add_action('admin_menu', 'capsule_server_menu');
+
+function capsule_server_page() {
+// TODO
 }
