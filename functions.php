@@ -195,6 +195,7 @@ function capsule_register_taxonomies() {
 				'slug' => 'evergreen',
 				'with_front' => false,
 			),
+			'show_ui' => false,
 		)
 	);
 }
