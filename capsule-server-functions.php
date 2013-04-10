@@ -52,11 +52,12 @@ class Capsule_Server {
 		// Just a request handler
 		$api_endpoint = $cap_server->api_endpoint;
 ?>
-<h3><?php _e('Capsule Credentials', 'capsule-server'); ?></h3>
+<div class="capsule-profile">
+<h3><?php _e('Capsule', 'capsule-server'); ?></h3>
 <table class="form-table">
 	<tr>
 		<th></th>
-		<td><span class="description"><?php _e('Enter the information below as a Server in your Capsule install. You will then be able to send posts to this Capsule Server.', 'capsle-server'); ?> </span></td>
+		<td><span class="description"><?php _e('To publish to this Capsule server, add the following information as a Server in your Capsule client.', 'capsule-server'); ?></td>
 	</tr>
 	<tr id="capsule-endpoint">
 		<th><label for="cap-endpoint"><?php _e('Capsule API Endpoint', 'capsule-server'); ?></label></th>
@@ -70,8 +71,14 @@ class Capsule_Server {
 		<th></th>
 		<td><a href="<?php echo wp_nonce_url(admin_url('admin-ajax.php'), 'cap-regenerate-key'); ?>" id="cap-regenerate-key" class="button" data-user-id="<?php echo esc_attr($user_data->ID); ?>"><?php _e('Change Capsule API Key', 'capsule-server'); ?></a></td>
 	</tr>
-
 </table>
+</div>
+<script type="text/javascript">
+jQuery(function($) {
+	$profile = $('.capsule-profile');
+	$profile.prependTo($profile.closest('form'));
+});
+</script>
 <?php 
 	}
 
