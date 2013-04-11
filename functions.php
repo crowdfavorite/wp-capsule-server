@@ -1,5 +1,9 @@
 <?php 
 
+include_once('ui/functions.php');
+include_once('capsule-server-import-export.php');
+
+
 class Capsule_Server {
 	
 	public $api_meta_key;
