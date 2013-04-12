@@ -3,7 +3,6 @@
 include_once('ui/functions.php');
 include_once('capsule-server-import-export.php');
 
-
 class Capsule_Server {
 	
 	public $api_meta_key;
@@ -26,20 +25,6 @@ class Capsule_Server {
 		add_action('user_register', array(&$this, 'user_register'));
 		add_action('show_user_profile', array(&$this, 'user_profile'));
 		add_action('edit_user_profile', array(&$this, 'user_profile'));
-
-		add_action('admin_enqueue_scripts', array(&$this, 'enqueue_scripts'));
-	}
-
-	public static function enqueue_scripts() {
-		$template_url = trailingslashit(get_template_directory_uri());
-	
-		wp_enqueue_script(
-			'capsule-server',
-			$template_url.'js/capsule-server.js',
-			array('jquery'),
-			CAPSULE_URL_VERSION,
-			true
-		);
 	}
 
 	public function user_register($user_id) {
@@ -78,10 +63,27 @@ class Capsule_Server {
 </table>
 </div>
 <script type="text/javascript">
-jQuery(function($) {
+(function($) {
+	// move into place
 	$profile = $('.capsule-profile');
 	$profile.prependTo($profile.closest('form'));
-});
+	// reset API key
+	$('#cap-regenerate-key').on('click', function(e) {
+		var id = $(this).data('user-id');
+		var url = $(this).attr('href');
+		e.preventDefault();
+		$.post(
+			url, { 
+				action: 'cap_new_api_key',
+				user_id: id 
+			},
+			function(data) {
+				if (data) {
+					$('#cap-api-key').html(data);
+				}
+			});
+	});
+})(jQuery);
 </script>
 <?php 
 	}
@@ -182,7 +184,7 @@ function capsule_server_admin_notice(){
 .capsule-welcome {
 	background: #222;
 	color: #fff;
-	margin: 10px 10px 10px 0;
+	margin: 30px 10px 10px 0;
 	padding: 15px;
 }
 .capsule-welcome h1 {
@@ -212,13 +214,32 @@ add_action('admin_notices', 'capsule_server_admin_notice');
 function capsule_server_menu() {
 	global $menu;
 	$menu['3'] = array( '', 'read', 'separator-capsule', '', 'wp-menu-separator' );
-	add_menu_page(__('Capsule', 'capsule_client'), __('Capsule', 'capsule-server'), 'manage_options', 'capsule', 'capsule_server_page', '', '3.1' );
+	add_menu_page(__('Capsule', 'capsule-server'), __('Capsule', 'capsule-server'), 'manage_options', 'capsule', 'capsule_server_page', '', '3.1' );
 	// needed to make separator show up
 	ksort($menu);
-// 	add_submenu_page('capsule', __('Projects', 'capsule_client'), __('Projects', 'capsule_client'), 'manage_options', 'capsule-projects', array($this, 'term_mapping_page'));
+ 	add_submenu_page('capsule', __('Projects', 'capsule-server'), __('Projects', 'capsule-server'), 'manage_options', 'capsule-projects', 'capsule_server_admin_page_projects');
+ 	add_submenu_page('capsule', __('Users', 'capsule-server'), __('Users', 'capsule-server'), 'manage_options', 'capsule-users', 'capsule_server_admin_page_users');
 }
 add_action('admin_menu', 'capsule_server_menu');
+
+function capsule_server_menu_js() {
+?>
+<script type="text/javascript">
+// TODO
+jQuery(function($) {
+	$('#adminmenu').find('a[href*="admin.php?page=capsule-projects"]')
+		.attr('href', 'edit-tags.php?taxonomy=projects')
+		.end()
+		.find('a[href*="admin.php?page=capsule-users"]')
+		.attr('href', 'users.php');
+});
+</script>
+<?php
+}
+add_action('admin_head', 'capsule_server_menu_js');
 
 function capsule_server_page() {
 // TODO
 }
+function capsule_server_admin_page_projects() {}
+function capsule_server_admin_page_users() {}
