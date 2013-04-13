@@ -214,7 +214,7 @@ add_action('admin_notices', 'capsule_server_admin_notice');
 function capsule_server_menu() {
 	global $menu;
 	$menu['3'] = array( '', 'read', 'separator-capsule', '', 'wp-menu-separator' );
-	add_menu_page(__('Capsule', 'capsule-server'), __('Capsule', 'capsule-server'), 'manage_options', 'capsule', 'capsule_server_page', '', '3.1' );
+	add_menu_page(__('Capsule', 'capsule-server'), __('Capsule', 'capsule-server'), 'manage_options', 'capsule', 'capsule_server_help', '', '3.1' );
 	// needed to make separator show up
 	ksort($menu);
  	add_submenu_page('capsule', __('Projects', 'capsule-server'), __('Projects', 'capsule-server'), 'manage_options', 'capsule-projects', 'capsule_server_admin_page_projects');
@@ -238,8 +238,107 @@ jQuery(function($) {
 }
 add_action('admin_head', 'capsule_server_menu_js');
 
-function capsule_server_page() {
-// TODO
+function capsule_server_help() {
+	if ( !current_user_can( 'manage_options' ) )  {
+		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+	}
+?>
+<style type="text/css">
+.capsule-welcome {
+	background: #222;
+	color: #fff;
+	margin-top: 20px;
+	width: 100%;
+}
+.capsule-welcome h1 {
+	font-weight: normal;
+	line-height: 100%;
+	margin: 0;
+	padding: 15px 0 10px 15px;
+}
+.capsule-welcome p {
+	font-weight: normal;
+	line-height: 100%;
+	margin: 0;
+	padding: 0 0 15px 15px;
+}
+.capsule-admin h3 {
+	margin-top: 25px;
+}
+.capsule-admin hr {
+	border: 0;
+	border-top: 1px solid #999;
+	margin: 0 100px 10px;
+}
+.capsule-screenshot {
+	border: 1px solid #ccc;
+	padding: 2px;
+	width: 90%;
+}
+.capsule-doc-col-left {
+	float: left;
+	margin-right: 30px;
+	margin-bottom: 30px;
+	max-width: 500px;
+	width: 45%;
+}
+.capsule-doc-col-right {
+	clear: right;
+	float: left;
+	margin-bottom: 30px;
+	max-width: 500px;
+	width: 45%;
+}
+</style>
+<div class="wrap capsule-admin">
+	<div class="capsule-welcome">
+		<h1><?php _e('Capsule Server', 'capsule-server'); ?></h1>
+		<p><?php _e('Turning the developer\'s code journal into a collaboration hub', 'capsule-server'); ?></p>
+	</div>
+
+	<div class="capsule-doc-col-left">
+		<h3><?php _e('Overview', 'capsule-server'); ?></h3>
+		<p><?php _e('Capsule Server is a collaboration hub. Developers do their independent journaling in their <a href="http://crowdfavorite.com/capsule/">Capsule</a> installs, then can choose to selectively send that content to the Capsule Server. Content is not created on the Capsule Server, it is replicated from developer\'s Capsule installations.', 'capsule-server'); ?></p>
+		<p><?php _e('Capsule Server can serve as a shared memory for a developement team - a home for decisions, failed approaches, ideas and notes that might not make it into code comments or other documentation.', 'capsule-server'); ?></p>
+
+		<h3><?php _e('Projects', 'capsule-server'); ?></h3>
+		<p><?php _e('<a href="edit-tags.php?taxonomy=projects">Create projects</a> to determine what content the Capsule Server will accept. Each developer can then opt-in to the projects they like, and any posts in their Capsule for that project will be replicated to the Capsule Server.', 'capsule-server'); ?></p>
+
+		<h3><?php _e('Users', 'capsule-server'); ?></h3>
+		<p><?php _e('<a href="users.php">Add user accounts</a> for developers who you want to contribute and/or to have access to contributed content. These developers are given the Capsule Server API URL and an API key on their Profile page. They each enter this information into their Capsule install which allows them to contribute content back to the Capsule Server.', 'capsule-server'); ?></p>
+		<p><?php _e('Only give accounts to trusted users (see Security below).', 'capsule-server'); ?></p>
+
+		<h3><?php _e('Security', 'capsule-server'); ?></h3>
+		<p><i><?php _e('Capsule Server is designed to be used with trusted users.', 'capsule-server'); ?></i></p>
+		<p><?php _e('For this reason, and to retain fidelity of post content, posts from Capsule instances are replicated verbatim on the Capsule Server. No KSES filtering or content sanitization is performed (regardless of user role).', 'capsule-server'); ?></p>
+		<p><?php _e('To revoke a developer\'s access, you can delete the user account. If you prefer to disable their account rather than deleting it, you can change their API key, password and email address.', 'capsule-server'); ?></p>
+
+	</div>
+	<div class="capsule-doc-col-right">
+		<h3><?php _e('Browse by Projects &amp; Tags', 'capsule-server'); ?></h3>
+		<p><img src="<?php echo get_template_directory_uri(); ?>/docs/projects.jpg" alt="<?php _e('Project List', 'capsule'); ?>" class="capsule-screenshot" /></p>
+		<p><?php _e('You can quickly access Capsule Server content by project or tag using the <b>@</b> and <b>#</b> menu items', 'capsule-server'); ?></p>
+
+		<h3><?php _e('Search', 'capsule-server'); ?></h3>
+		<p><img src="<?php echo get_template_directory_uri(); ?>/docs/search.jpg" alt="<?php _e('Search', 'capsule-server'); ?>" class="capsule-screenshot" /></p>
+		<p><?php _e('Capsule supports both keyword search and filtering by projects, tags, code languages, developer and date range, whew! When using keyword search you can auto-complete projects, tags, and code languages by using their syntax prefix.', 'capsule-server'); ?></p>
+		<p><?php _e('When filtering, multiple projects/tags/developers/etc. can be selected and are all populated with auto-complete.', 'capsule-server'); ?></p>
+
+	</div>
+	<br style="clear: both;">
+	<hr>
+	<div class="capsule-doc-col-left">
+		<h3><?php _e('Credits', 'capsule'); ?></h3>
+		<p><?php _e('Capsule was conceived and executed by the brilliant and devastatingly good-looking men and women at <a href="http://crowdfavorite.com">Crowd Favorite</a>.', 'capsule'); ?></p>
+		<p><?php _e('Capsule and Capsule Server are released under the GPL v2 license.', 'capsule'); ?></p>
+	</div>
+	<div class="capsule-doc-col-right">
+		<h3>&nbsp;</h3>
+		<p><?php _e('In the finest tradition of Open Source, Capsule was built on the shoulders of the following giants:', 'capsule'); ?></p>
+		<?php capsule_credits(); ?>
+	</div>
+</div>
+<?php
 }
 function capsule_server_admin_page_projects() {}
 function capsule_server_admin_page_users() {}
