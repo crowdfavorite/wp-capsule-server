@@ -316,6 +316,7 @@ function capsule_server_help() {
 		<p><i><?php _e('Capsule Server is designed to be used with trusted users.', 'capsule-server'); ?></i></p>
 		<p><?php _e('For this reason, and to retain fidelity of post content, posts from Capsule instances are replicated verbatim on the Capsule Server. No KSES filtering or content sanitization is performed (regardless of user role).', 'capsule-server'); ?></p>
 		<p><?php _e('To revoke a developer\'s access, you can delete the user account. If you prefer to disable their account rather than deleting it, you can change their API key, password and email address.', 'capsule-server'); ?></p>
+		<p><?php _e('As Capsule Server is expected to be used with technical teams that may use self-signed SSL certificates, Capsule is configured to automatically accept self-signed certificates when talking to a Capsule Server.', 'capsule-server'); ?></p>
 
 	</div>
 	<div class="capsule-doc-col-right">
