@@ -301,12 +301,16 @@ function capsule_server_help() {
 		<p><?php _e('Capsule Server is a collaboration hub. Developers do their independent journaling in their <a href="http://crowdfavorite.com/capsule/">Capsule</a> installs, then can choose to selectively send that content to the Capsule Server. Content is not created on the Capsule Server, it is replicated from developer\'s Capsule installations.', 'capsule-server'); ?></p>
 		<p><?php _e('Capsule Server can serve as a shared memory for a developement team - a home for decisions, failed approaches, ideas and notes that might not make it into code comments or other documentation.', 'capsule-server'); ?></p>
 
-		<h3><?php _e('Projects', 'capsule-server'); ?></h3>
+		<h3><?php _e('Developers, Get Your API Key', 'capsule-server'); ?></h3>
+		<p><?php _e('Contributors to this Capsule Server can get their API key on their <a href="profile.php">Profile page</a>.', 'capsule-server'); ?></p>
+
+
+		<h3><?php _e('Manage Projects', 'capsule-server'); ?></h3>
 		<p><?php _e('<a href="edit-tags.php?taxonomy=projects">Create projects</a> to determine what content the Capsule Server will accept. Each developer can then opt-in to the projects they like, and any posts in their Capsule for that project will be replicated to the Capsule Server.', 'capsule-server'); ?></p>
 
-		<h3><?php _e('Users', 'capsule-server'); ?></h3>
+		<h3><?php _e('Manage Users', 'capsule-server'); ?></h3>
 		<p><?php _e('<a href="users.php">Add user accounts</a> for developers who you want to contribute and/or to have access to contributed content. These developers are given the Capsule Server API URL and an API key on their Profile page. They each enter this information into their Capsule install which allows them to contribute content back to the Capsule Server.', 'capsule-server'); ?></p>
-		<p><?php _e('Only give accounts to trusted users (see Security below).', 'capsule-server'); ?></p>
+		<p><?php _e('The recommended role for Capsule API users is <code>subscriber</code>. Only give accounts to trusted users (see Security below).', 'capsule-server'); ?></p>
 
 		<h3><?php _e('Security', 'capsule-server'); ?></h3>
 		<p><i><?php _e('Capsule Server is designed to be used with trusted users.', 'capsule-server'); ?></i></p>
