@@ -173,9 +173,17 @@ function capsule_server_request_handler() {
 			}
 			else {
 				header('HTTP/1.1 401 Unauthorized');
-			}	
+			}
 			die();
-			break;		
+			break;
+		case 'test_credentials':
+			if (isset($_POST['capsule_client_post_data']['api_key']) && capsule_server_validate_user($_POST['capsule_client_post_data']['api_key'])) {
+				echo 'authorized';
+			}
+			else {
+				header('HTTP/1.1 401 Unauthorized');
+			}
+			die();
 		default:
 			break;
 	}
