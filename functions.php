@@ -214,11 +214,11 @@ add_action('admin_notices', 'capsule_server_admin_notice');
 function capsule_server_menu() {
 	global $menu;
 	$menu['3'] = array( '', 'read', 'separator-capsule', '', 'wp-menu-separator' );
-	add_menu_page(__('Capsule', 'capsule-server'), __('Capsule', 'capsule-server'), 'manage_options', 'capsule', 'capsule_server_help', '', '3.1' );
+	add_menu_page(__('Capsule', 'capsule-server'), __('Capsule', 'capsule-server'), 'read', 'capsule', 'capsule_server_help', '', '3.1' );
 	// needed to make separator show up
 	ksort($menu);
- 	add_submenu_page('capsule', __('Projects', 'capsule-server'), __('Projects', 'capsule-server'), 'manage_options', 'capsule-projects', 'capsule_server_admin_page_projects');
- 	add_submenu_page('capsule', __('Users', 'capsule-server'), __('Users', 'capsule-server'), 'manage_options', 'capsule-users', 'capsule_server_admin_page_users');
+ 	add_submenu_page('capsule', __('Projects', 'capsule-server'), __('Projects', 'capsule-server'), 'manage_categories', 'capsule-projects', 'capsule_server_admin_page_projects');
+ 	add_submenu_page('capsule', __('Users', 'capsule-server'), __('Users', 'capsule-server'), 'create_users', 'capsule-users', 'capsule_server_admin_page_users');
 }
 add_action('admin_menu', 'capsule_server_menu');
 
@@ -239,9 +239,6 @@ jQuery(function($) {
 add_action('admin_head', 'capsule_server_menu_js');
 
 function capsule_server_help() {
-	if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	}
 ?>
 <style type="text/css">
 .capsule-welcome {
