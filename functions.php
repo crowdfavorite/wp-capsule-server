@@ -214,7 +214,7 @@ add_action('admin_notices', 'capsule_server_admin_notice');
 function capsule_server_menu() {
 	global $menu;
 	$menu['3'] = array( '', 'read', 'separator-capsule', '', 'wp-menu-separator' );
-	add_menu_page(__('Capsule', 'capsule-server'), __('Capsule', 'capsule-server'), 'read', 'capsule', 'capsule_server_help', '', '3.1' );
+	add_menu_page(__('Capsule Server', 'capsule-server'), __('Capsule Server', 'capsule-server'), 'read', 'capsule', 'capsule_server_help', '', '3.1' );
 	// needed to make separator show up
 	ksort($menu);
  	add_submenu_page('capsule', __('Projects', 'capsule-server'), __('Projects', 'capsule-server'), 'manage_categories', 'capsule-projects', 'capsule_server_admin_page_projects');
@@ -292,6 +292,7 @@ function capsule_server_help() {
 		<h1><?php _e('Capsule Server', 'capsule-server'); ?></h1>
 		<p><?php _e('Turning the developer\'s code journal into a collaboration hub', 'capsule-server'); ?></p>
 	</div>
+	<img src="<?php echo get_template_directory_uri(); ?>/docs/hero.jpg" style="width: 100%;" alt="" />
 
 	<div class="capsule-doc-col-left">
 		<h3><?php _e('Overview', 'capsule-server'); ?></h3>
