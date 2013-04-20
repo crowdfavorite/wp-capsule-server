@@ -128,7 +128,11 @@ class Capsule_Server_Export_Terms {
 	function get_terms() {
 		$taxonomy_array = array();
 
-		$terms = get_terms($this->taxonomies, array('hide_empty' => false));
+		$terms = get_terms($this->taxonomies, array(
+			'hide_empty' => false,
+			'orderby' => 'slug',
+			'order' => 'ASC',
+		));
 		if (is_array($terms)) {
 			foreach ($terms as $term) {
 				$taxonomy_array[$term->taxonomy][$term->slug] = array(
@@ -143,7 +147,7 @@ class Capsule_Server_Export_Terms {
 	}
 }
 
-function capsule_server_request_handler() {
+function capsule_server_controller() {
 	switch ($_POST['capsule_server_action']) {
 		case 'insert_post':
 			// Cannot use nonce here as they're salted with unique keys, going to have to rely on api key.
@@ -188,5 +192,5 @@ function capsule_server_request_handler() {
 			break;
 	}
 }
-add_action('wp_loaded', 'capsule_server_request_handler');
+add_action('wp_loaded', 'capsule_server_controller');
 
