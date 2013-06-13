@@ -161,10 +161,14 @@ function capsule_server_controller() {
 						$capsule_import = new Capsule_Server_Import_Post($user_id, $data['post'], $data['tax']);
 						$post_id = $capsule_import->import();
 						
-						$result = ($capsule_import->local_post_id == 0 ? 'error' : 'success');
-						$response = array(
-							'result' => $result,
-						);
+						if ($capsule_import->local_post_id != 0) {
+							$response = array(
+								'result' => 'success',
+								'data' => array(
+									'permalink' => get_permalink($capsule_import->local_post_id),
+								),
+							);
+						}
 					}
 					else {
 						header('HTTP/1.1 401 Unauthorized');
