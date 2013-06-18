@@ -30,3 +30,9 @@ Developers, contribute on [GitHub](https://github.com/crowdfavorite/wp-capsule-s
 - Capsule UI: https://github.com/crowdfavorite/wp-capsule-ui
 
 Capsule UI is a submodule of both Capsule and Capsule Server, delivering the UI for both packages.
+
+---
+
+## Changelog
+
+View the [combined changelog](https://github.com/crowdfavorite/wp-capsule-ui/blob/master/CHANGELOG.txt) for Capsule and Capsule Server.

@@ -150,6 +150,9 @@ class Capsule_Server_Export_Terms {
 function capsule_server_controller() {
 	switch ($_POST['capsule_server_action']) {
 		case 'insert_post':
+			$response = array(
+				'result' => 'error',
+			);
 			// Cannot use nonce here as they're salted with unique keys, going to have to rely on api key.
 			if (isset($_POST['capsule_client_post_data'])) {
 				$data = $_POST['capsule_client_post_data'];
@@ -157,17 +160,25 @@ function capsule_server_controller() {
 					if ($user_id = capsule_server_validate_user($data['api_key'])) {
 						$capsule_import = new Capsule_Server_Import_Post($user_id, $data['post'], $data['tax']);
 						$post_id = $capsule_import->import();
+						
+						if ($capsule_import->local_post_id != 0) {
+							$response = array(
+								'result' => 'success',
+								'data' => array(
+									'permalink' => get_permalink($capsule_import->local_post_id),
+								),
+							);
+						}
 					}
 					else {
 						header('HTTP/1.1 401 Unauthorized');
 						die();
 					}
-					//@TODO catch error?
-				}
-				else {
-					//@TODO error
 				}
 			}
+			header('Content-type: application/json');
+			echo json_encode($response);
+			die();
 			break;
 		case 'get_terms':
 			if (isset($_POST['capsule_client_post_data']['api_key']) && capsule_server_validate_user($_POST['capsule_client_post_data']['api_key'])) {
