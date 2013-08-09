@@ -203,5 +203,5 @@ function capsule_server_controller() {
 			break;
 	}
 }
-add_action('wp_loaded', 'capsule_server_controller');
+add_action( 'init', 'capsule_server_controller', 9998 );
 
