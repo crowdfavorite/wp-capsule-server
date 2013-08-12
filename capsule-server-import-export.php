@@ -203,5 +203,6 @@ function capsule_server_controller() {
 			break;
 	}
 }
-add_action( 'init', 'capsule_server_controller', 9998 );
+// Come in after taxonomies are typically registered but before the wp-gatekeeper plugin
+add_action('init', 'capsule_server_controller', 11);
 
