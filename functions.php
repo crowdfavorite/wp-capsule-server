@@ -176,7 +176,7 @@ function capsule_server_validate_user($api_key) {
 }
 
 function capsule_server_admin_notice(){
-	if (strpos($_GET['page'], 'capsule') !== false) {
+	if ( empty( $_GET['page'] ) || strpos( $_GET['page'], 'capsule' ) !== false ) {
 		return;
 	}
 ?>
