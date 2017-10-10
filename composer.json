@@ -11,7 +11,7 @@
                 "source": {
                     "url": "https://github.com/crowdfavorite/wp-capsule-ui.git",
                     "type": "git",
-                    "reference": "update-repo-without-submodules"
+                    "reference": "develop"
                 }
             }
         }
