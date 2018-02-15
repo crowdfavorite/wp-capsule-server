@@ -1,4 +1,9 @@
 <?php 
+/**
+ * Theme functions file.
+ *
+ * @package capsule-server
+ */
 
 require_once 'ui/functions.php';
 require_once 'capsule-server-import-export.php';
@@ -47,14 +52,14 @@ function capsule_server_api_meta_key() {
  * Validates a user's existance in the db against an api key.
  *
  * @param string $api_key The api key to use for the validation.
- * @return integer|null User ID or null if none can be found.
+ * @return integer User ID or 0 if none can be found.
  */
 function capsule_server_validate_user( $api_key ) {
 	global $wpdb;
 
 	$meta_key = capsule_server_api_meta_key();
 
-	return $wpdb->get_var(
+	return (int) $wpdb->get_var(
 		$wpdb->prepare( '
 			SELECT `user_id`
 			FROM ' . $wpdb->usermeta . '
