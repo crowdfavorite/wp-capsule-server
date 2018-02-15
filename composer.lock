@@ -1,0 +1,28 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "019aca80a30e2951ac1b43fdc572bebc",
+    "packages": [
+        {
+            "name": "ui",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crowdfavorite/wp-capsule-ui.git",
+                "reference": "develop"
+            },
+            "type": "library"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

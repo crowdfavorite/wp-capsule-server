@@ -1,7 +1,8 @@
 <?php
-
 /**
- * @package capsule
+ * Capsule server entry point.
+ *
+ * @package capsule-server
  *
  * This file is part of the Capsule Theme for WordPress
  * http://crowdfavorite.com/capsule/
@@ -12,12 +13,12 @@
  * **********************************************************************
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * **********************************************************************
  */
 
-define('CAPSULE_SERVER', true);
+define( 'CAPSULE_SERVER', true );
 
-$body_classes = array('capsule-server');
+$body_classes = array( 'capsule-server' );
 
-include('ui/index.php');
+include( 'ui/index.php' );
