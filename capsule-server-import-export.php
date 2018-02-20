@@ -44,7 +44,7 @@ function capsule_server_controller() {
 					}
 				}
 			}
-			wp_json_send( $response );
+			wp_send_json( $response );
 			break;
 
 		case 'get_terms':

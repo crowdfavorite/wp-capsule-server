@@ -21,4 +21,4 @@ define( 'CAPSULE_SERVER', true );
 
 $body_classes = array( 'capsule-server' );
 
-include( 'ui/index.php' );
+require 'ui/index.php';
