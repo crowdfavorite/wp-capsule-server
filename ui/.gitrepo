@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:crowdfavorite/wp-capsule-ui.git
 	branch = develop
-	commit = fea2011b975484b7098b3d6700b7e53cd2397d9f
-	parent = 9480a64a33ad6b22cd2cb5bdb8208e529b0f17e1
+	commit = ff73b8dbc581d1586945193add87a787cc9a3a30
+	parent = 0c6f3ad30cba8e597f4f30ea8e4c23ab976344ee
 	method = merge
 	cmdver = 0.4.0
