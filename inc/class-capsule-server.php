@@ -97,7 +97,7 @@ class Capsule_Server {
 		}
 		wp_enqueue_script( 'capsule-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'jquery' ), '20180213.1245' );
 
-		wp_enqueue_style( 'capsule-admin', get_stylesheet_directory_uri() . '/assets/css/admin.css', array(), '20180213.1245' );
+		wp_enqueue_style( 'capsule-admin', get_stylesheet_directory_uri() . '/assets/css/admin.css', array(), '20180309.1630' );
 	}
 
 	/**
