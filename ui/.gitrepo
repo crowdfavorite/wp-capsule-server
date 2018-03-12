@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:crowdfavorite/wp-capsule-ui.git
+	branch = master
+	commit = 4a1c31e4ed58f5c201c0ab4b6a3b86ae030c0107
+	parent = b896aca68aba14b4b06f5c90a5acf47ce42ce190
+	method = merge
+	cmdver = 0.4.0

@@ -1,0 +1,68 @@
+.capsule-welcome {
+	background: #222;
+	color: #fff;
+	margin: 30px 10px 10px 0;
+	padding: 15px;
+}
+.capsule-welcome h1 {
+	color: #fff;
+	font-weight: normal;
+	line-height: 100%;
+	margin: 0 0 10px 0;
+}
+.capsule-welcome p {
+	font-weight: normal;
+	line-height: 100%;
+	margin: 0;
+}
+.capsule-welcome a,
+.capsule-welcome a:visited {
+	color: #f8f8f8;
+}
+
+.capsule-welcome {
+	background: #222;
+	color: #fff;
+	margin-top: 20px;
+	width: 100%;
+}
+.capsule-welcome h1 {
+	font-weight: normal;
+	line-height: 100%;
+	margin: 0;
+	padding: 15px 0 10px 15px;
+}
+.capsule-welcome p {
+	font-weight: normal;
+	line-height: 100%;
+	margin: 0;
+	padding: 0 0 15px 15px;
+}
+.capsule-admin h3 {
+	margin-top: 25px;
+}
+.capsule-admin hr {
+	border: 0;
+	border-top: 1px solid #999;
+	margin: 0 100px 10px;
+}
+.capsule-screenshot {
+	border: 1px solid #ccc;
+	padding: 2px;
+	width: 90%;
+}
+.capsule-doc-col-left {
+	float: left;
+	margin-right: 30px;
+	margin-bottom: 30px;
+	max-width: 500px;
+	width: 45%;
+}
+.capsule-doc-col-right {
+	clear: right;
+	float: left;
+	margin-bottom: 30px;
+	max-width: 500px;
+	width: 45%;
+}
+
