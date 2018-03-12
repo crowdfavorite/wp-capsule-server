@@ -6,7 +6,7 @@ _A collaboration hub for [Capsule](http://crowdfavorite.com/capsule/) content._
 
 This is a WordPress theme. Install it as usual to turn a WordPress instance into a Capsule Server. [Learn more.](http://crowdfavorite.com/capsule/)
 
-Minimum required WordPress version: 3.5
+Minimum required WordPress version: 4.1
 
 Target browser compatibility:
 
