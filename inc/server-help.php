@@ -53,7 +53,10 @@
 		<p><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/docs/search.jpg" alt="<?php esc_html_e( 'Search', 'capsule-server' ); ?>" class="capsule-screenshot" /></p>
 		<p><?php esc_html_e( 'Capsule supports both keyword search and filtering by projects, tags, code languages, developer and date range, whew! When using keyword search you can auto-complete projects, tags, and code languages by using their syntax prefix.', 'capsule-server' ); ?></p>
 		<p><?php esc_html_e( 'When filtering, multiple projects/tags/developers/etc. can be selected and are all populated with auto-complete.', 'capsule-server' ); ?></p>
-
+		<h3><?php esc_html_e( 'Using dnsmasq', 'capsule-server' ); ?></h3>
+		<p><?php esc_html_e( 'Many local development environments take advantage of dnsmasq to have pretty links for their local projects. However, please be aware that there is a common issue affecting cURL usage on environments with dnsmasq running as a service.', 'capsule-server' ); ?></p>
+		<p><?php esc_html_e( 'As WP Capsule uses cURL to sync capsules, you might find that your local instance is not able to properly send information over to your defined WP Capsule Server.', 'capsule-server' ); ?></p>
+		<p><?php esc_html_e( 'To check if your local domain properly resolves, use the terminal command dig, followed by your local URL (eg: dig mywebsite.localhost). In the response section of the output you should see an A record pointing to 127.0.0.1.', 'capsule-server' ); ?></p>
 	</div>
 	<br style="clear: both;">
 	<hr>
