@@ -12,7 +12,7 @@
 				printf(
 					// Translators: %s is the Capsule url.
 					esc_html__( 'Capsule Server is a collaboration hub. Developers do their independent journaling in their %s installs, then can choose to selectively send that content to the Capsule Server. Content is not created on the Capsule Server, it is replicated from developer\'s Capsule installations.', 'capsule-server' ),
-					'<a href="http://crowdfavorite.com/capsule/">' . esc_html__( 'Capsule', 'capsule-server' ) . '</a>'
+					'<a href="https://crowdfavorite.com/capsule/">' . esc_html__( 'Capsule', 'capsule-server' ) . '</a>'
 				);
 			?>
 		</p>
