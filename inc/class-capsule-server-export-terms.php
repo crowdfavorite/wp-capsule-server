@@ -1,21 +1,26 @@
 <?php
+
 /**
  * Export terms implementation.
  *
  * @package capsule-server
  */
 
+namespace CrowdFavorite\Capsule;
+
 /**
  * Export Terms class.
  */
-class Capsule_Server_Export_Terms {
+class CapsuleServerExportTerms
+{
 
 	/**
 	 * Constructor.
 	 *
 	 * @param array $taxonomies Existing taxonomies.
 	 */
-	public function __construct( $taxonomies = array() ) {
+	public function __construct($taxonomies = array())
+	{
 		$this->taxonomies = $taxonomies;
 	}
 
@@ -33,17 +38,18 @@ class Capsule_Server_Export_Terms {
 	 *  ),
 	 *  'taxonomy_2' ...
 	 */
-	public function get_terms() {
+	public function getTerms()
+	{
 		$taxonomy_array = array();
 
-		$terms = get_terms( $this->taxonomies, array(
+		$terms = get_terms($this->taxonomies, array(
 			'hide_empty' => false,
 			'orderby'    => 'slug',
 			'order'      => 'ASC',
 		));
 
-		if ( is_array( $terms ) ) {
-			foreach ( $terms as $term ) {
+		if (is_array($terms)) {
+			foreach ($terms as $term) {
 				$taxonomy_array[ $term->taxonomy ][ $term->slug ] = array(
 					'id'          => $term->term_id,
 					'name'        => $term->name,
