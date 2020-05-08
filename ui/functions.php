@@ -11,7 +11,6 @@ define('CAPSULE_TAX_PREFIX_PROJECT', '@');
 define('CAPSULE_TAX_PREFIX_TAG', '#');
 define('CAPSULE_TAX_PREFIX_CODE', '`');
 
-
 show_admin_bar(false);
 remove_post_type_support('post', 'post-formats');
 
