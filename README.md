@@ -6,7 +6,6 @@
 
 <h3 align="center">WP Capsule Server</h3>
 
-
 <p align="center">
   <i>Turning the developer's code journal into a collaboration hub.</i>
   <br>

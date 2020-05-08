@@ -75,7 +75,7 @@
 				printf(
 					// Translators: the %s is the link to Crowd Favorite site.
 					esc_html__('Capsule was conceived and executed by the brilliant and devastatingly good-looking men and women at %s.', 'capsule-server'),
-					'<a href="http://crowdfavorite.com">' . esc_html__('Crowd Favorite', 'capsule-server') . '</a>'
+					'<a href="https://crowdfavorite.com">' . esc_html__('Crowd Favorite', 'capsule-server') . '</a>'
 				);
 				?>
 		</p>
