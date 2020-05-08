@@ -1,4 +1,5 @@
-<?php
+<?php //phpcs:disable Files.SideEffects
+
 /**
  * Capsule server entry point.
  *
@@ -17,7 +18,7 @@
  * **********************************************************************
  */
 
-define( 'CAPSULE_SERVER', true );
+define('CAPSULE_SERVER', true);
 
 $body_classes = array( 'capsule-server' );
 
