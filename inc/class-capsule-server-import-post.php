@@ -69,7 +69,7 @@ class CapsuleServerImportPost
 			$this->local_post_id = 0;
 			// Translators: %s is the post guid.
 			throw new \Exception(
-				sprintf(__('Unable to import post with guid: %s', 'capsule-server'), $this->post['guid'])
+				sprintf(esc_html__('Unable to import post with guid: %s', 'capsule-server'), $this->post['guid'])
 			);
 		}
 	}

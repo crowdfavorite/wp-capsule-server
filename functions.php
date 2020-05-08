@@ -118,8 +118,8 @@ function capsule_server_menu()
 	global $menu;
 	$menu['3'] = array( '', 'read', 'separator-capsule', '', 'wp-menu-separator' );
 	add_menu_page(
-		__('Capsule Server', 'capsule-server'),
-		__('Capsule Server', 'capsule-server'),
+		esc_html__('Capsule Server', 'capsule-server'),
+		esc_html__('Capsule Server', 'capsule-server'),
 		'read',
 		'capsule',
 		'capsule_server_help',
@@ -130,8 +130,8 @@ function capsule_server_menu()
 	ksort($menu);
 	add_submenu_page(
 		'capsule',
-		__('Projects', 'capsule-server'),
-		__('Projects', 'capsule-server'),
+		esc_html__('Projects', 'capsule-server'),
+		esc_html__('Projects', 'capsule-server'),
 		'manage_categories',
 		'capsule-projects',
 		'capsule_server_admin_page_projects'
@@ -139,8 +139,8 @@ function capsule_server_menu()
 
 	add_submenu_page(
 		'capsule',
-		__('Users', 'capsule-server'),
-		__('Users', 'capsule-server'),
+		esc_html__('Users', 'capsule-server'),
+		esc_html__('Users', 'capsule-server'),
 		'create_users',
 		'capsule-users',
 		'capsule_server_admin_page_users'
