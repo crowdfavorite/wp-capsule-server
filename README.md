@@ -1,10 +1,10 @@
 # Capsule Server
 
-_A collaboration hub for [Capsule](http://crowdfavorite.com/capsule/) content._
+_A collaboration hub for [Capsule](https://crowdfavorite.com/capsule/) content._
 
 ---
 
-This is a WordPress theme. Install it as usual to turn a WordPress instance into a Capsule Server. [Learn more.](http://crowdfavorite.com/capsule/)
+This is a WordPress theme. Install it as usual to turn a WordPress instance into a Capsule Server. [Learn more.](https://crowdfavorite.com/capsule/)
 
 Minimum required WordPress version: 4.1
 
@@ -17,7 +17,7 @@ Target browser compatibility:
 - IE10 (functional)
 
 
-License: [GPL v2](http://opensource.org/licenses/GPL-2.0)
+License: [GPL v2](https://opensource.org/licenses/GPL-2.0)
 
 Developers, contribute on [GitHub](https://github.com/crowdfavorite/wp-capsule-server).
 
