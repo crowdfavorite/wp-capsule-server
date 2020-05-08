@@ -1,39 +1,100 @@
-# Capsule Server
+<p align="center">
+  <a target="_blank" href="https://crowdfavorite.com/capsule/">
+    <img src="icon.png" alt="Capsule Server logo" width="72" height="72">
+  </a>
+</p>
 
-_A collaboration hub for [Capsule](http://crowdfavorite.com/capsule/) content._
+<h3 align="center">WP Capsule Server</h3>
 
----
+<p align="center">
+  <i>Turning the developer's code journal into a collaboration hub.</i>
+  <br>
+  <a href="DOCUMENTATION.md"><strong>Explore WP Capsule Server docs »</strong></a>
+  <br>
+  <br>
+  <a href="https://github.com/crowdfavorite/wp-capsule-server/issues/new?template=bug_report.md&labels=bug">Report bug</a>
+  ·
+  <a href="https://github.com/crowdfavorite/wp-capsule-server/issues/new?template=feature_request.md&labels=feature">Request feature</a>
+  ·
+  <a href="https://github.com/crowdfavorite/wp-capsule/">Check out WP Capsule</a>
+</p>
 
-This is a WordPress theme. Install it as usual to turn a WordPress instance into a Capsule Server. [Learn more.](http://crowdfavorite.com/capsule/)
 
-Minimum required WordPress version: 4.1
+## Table of contents
 
-Target browser compatibility:
+- [Quick start](#quick-start)
+- [Requirements](#requirements)
+- [Status](#status)
+- [Bugs and feature requests](#bugs-and-feature-requests)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [Community](#community)
+- [Versioning](#versioning)
+- [Changelog](#changelog)
+- [License](#license)
 
-- Chrome
-- Safari
-- Firefox
-- IE9 (functional)
-- IE10 (functional)
+
+## Quick start
+
+This is a WordPress theme. Install it as usual to turn a WordPress instance into a Capsule code journal server.
+
+- [Download the latest release.](https://github.com/crowdfavorite/wp-capsule-server/releases/)
+
+or
+
+- Clone the repo: `git clone https://github.com/crowdfavorite/wp-capsule-server.git` in your `wp-content/themes` folder
+
+Read the _Welcome_ page (available in your WordPress dashboard at `wp-admin/admin.php?page=capsule`) for more information.
 
 
-License: [GPL v2](http://opensource.org/licenses/GPL-2.0)
+## Requirements
 
-Developers, contribute on [GitHub](https://github.com/crowdfavorite/wp-capsule-server).
+WP Capsule Server is dependent on:
 
----
+- Minimum **PHP** version **5.6**
+- Minimum **WordPress** version **4.1**
 
-**Repository Structure**
 
-- Capsule: https://github.com/crowdfavorite/wp-capsule
-- Capsule Server: https://github.com/crowdfavorite/wp-capsule-server
-- Capsule UI: https://github.com/crowdfavorite/wp-capsule-ui
+## Status
 
-Capsule UI is a subrepo of both Capsule and Capsule Server, delivering the UI for both packages.
-Read more about Git subrepo at https://github.com/ingydotnet/git-subrepo
+[![Latest Release](https://img.shields.io/github/v/release/crowdfavorite/wp-capsule-server)](https://github.com/crowdfavorite/wp-capsule-server/releases)
+[![GitHub forks](https://img.shields.io/github/forks/crowdfavorite/wp-capsule-server)](https://github.com/crowdfavorite/wp-capsule-server/network)
+[![GitHub stars](https://img.shields.io/github/stars/crowdfavorite/wp-capsule-server)](https://github.com/crowdfavorite/wp-capsule-server/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/crowdfavorite/wp-capsule-server)](https://github.com/crowdfavorite/wp-capsule-server/issues)
+[![GitHub license](https://img.shields.io/github/license/crowdfavorite/wp-capsule-server)](https://github.com/crowdfavorite/wp-capsule-server/blob/develop/LICENSE)
 
----
+## Bugs and feature requests
+
+Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/crowdfavorite/wp-capsule-server/blob/master/.github/CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/crowdfavorite/wp-capsule-server/issues/new).
+
+
+## Documentation
+
+WP Capsule Server's documentation is available in your WordPress dashboard, at `wp-admin/admin.php?page=capsule`. It is also included in the repo, [here](DOCUMENTATION.md).
+
+
+## Contributing
+
+Please read through our [contributing guidelines](https://github.com/crowdfavorite/wp-capsule-server/blob/master/.github/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+
+
+## Community
+
+Get updates on WP Capsule Server's development and chat with the project maintainers and community members.
+
+- Follow [@crowdfavorite on Twitter](https://twitter.com/crowdfavorite).
+- Reach out to us on our [website](https://crowdfavorite.com)
+
+## Versioning
+
+For transparency into our release cycle and in striving to maintain backward compatibility, WP Capsule Server is maintained under [the Semantic Versioning guidelines](http://semver.org/). Sometimes we screw up, but we adhere to those rules whenever possible.
+
 
 ## Changelog
+See [the Releases section of our GitHub project](https://github.com/crowdfavorite/wp-capsule-server/releases) for changelogs for each release version of WP Capsule Server,
+or a historical changelog can be found in the repo, [here](https://github.com/crowdfavorite/wp-capsule-server/blob/master/CHANGELOG.md).
 
-View the [combined changelog](https://github.com/crowdfavorite/wp-capsule-ui/blob/master/CHANGELOG.txt) for Capsule and Capsule Server.
+
+## License
+
+WP Capsule is released under the [GPLv2 License](https://github.com/crowdfavorite/wp-capsule-server/blob/master/LICENSE).

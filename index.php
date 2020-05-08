@@ -1,14 +1,15 @@
-<?php
+<?php //phpcs:disable Files.SideEffects
+
 /**
  * Capsule server entry point.
  *
  * @package capsule-server
  *
  * This file is part of the Capsule Theme for WordPress
- * http://crowdfavorite.com/capsule/
+ * https://crowdfavorite.com/capsule/
  *
- * Copyright (c) 2012 Crowd Favorite, Ltd. All rights reserved.
- * http://crowdfavorite.com
+ * Copyright (c) 2020 Crowd Favorite, Ltd. All rights reserved.
+ * https://crowdfavorite.com
  *
  * **********************************************************************
  * This program is distributed in the hope that it will be useful, but
@@ -17,7 +18,7 @@
  * **********************************************************************
  */
 
-define( 'CAPSULE_SERVER', true );
+define('CAPSULE_SERVER', true);
 
 $body_classes = array( 'capsule-server' );
 
