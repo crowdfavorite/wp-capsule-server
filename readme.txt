@@ -1,4 +1,4 @@
-=== WP Capsule ===
+=== WP Capsule Server ===
 Contributors: crowdfavorite
 Tags: code journal, developer journal, capsule, crowdfavorite
 Requires at least: 5.0.0
@@ -8,7 +8,7 @@ Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The developer's code journal.
+The developer's code journal - server edition.
 
 == Description ==
 
@@ -19,7 +19,7 @@ Capsule is a replacement for that scratch document. It archives and organizes yo
 We have intentionally designed Capsule so that you you can stay on the front-end of the app for everything except administrative tasks (adding Capsule Servers, mapping projects, etc.).
 
 = HOW TO USE =
-This is a WordPress theme. Install it as usual to turn a WordPress instance into a Capsule code journal.
+This is a WordPress theme. Install it as usual to turn a WordPress instance into a Capsule code journal Server.
 
 == Changelog ==
 = Version 1.4.0 =
