@@ -6,6 +6,7 @@
  * @package capsule-server
  */
 
+require_once 'config.php';
 require_once 'ui/functions.php';
 require_once 'capsule-server-import-export.php';
 require_once 'inc/class-capsule-server.php';
