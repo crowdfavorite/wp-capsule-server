@@ -31,6 +31,11 @@ if (allowSave)
 
 http.createServer(function(req, res) {
     var uri = unescape(url.parse(req.url).pathname);
+    if (path.normalize(unescape(uri)) !== unescape(uri)) {
+        res.statusCode = 403;
+        res.end();
+        return;
+    }
     var filename = path.join(process.cwd(), uri);
 
     if (req.method == "OPTIONS") {
